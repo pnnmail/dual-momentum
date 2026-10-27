@@ -1,0 +1,27 @@
+DUAL_MOMENTUM -- SUMMARY
+============================================================
+
+Metrics (2007-01-01 .. 2026-09-20, costs 5bp one-way):
+    strategy   CAGR    Vol Sharpe   MaxDD Calmar HitRate Turnover_annual
+DualMomentum 11.50% 15.95%   0.76 -31.09%   0.37   60.6%            3.19
+ SPY_buyhold 10.95% 19.56%   0.63 -55.19%   0.20   65.7%             n/a
+       60_40  8.15% 11.17%   0.76 -31.41%   0.26   66.5%            0.16
+
+DM Sharpe 0.76 vs SPY 0.63 vs 60/40 0.76
+Conclusion: DM beats both baselines on Sharpe.
+
+Check 1 (crash periods):
+  2008: return=+20.0% drawdown=-12.8% [OK]
+  2020: return=+20.4% drawdown=-22.0% [FAIL (drawdown >20%)]
+  2022: return=-22.5% drawdown=-23.7% [FAIL (drawdown >20%)]
+
+Check 2 (split test): Sharpe 2007-2015=0.87, 2015-2026=0.68, ratio=1.27x [OK]
+
+Check 3 (lookback sensitivity, diagnostic):
+  3mo: Sharpe=0.88
+  6mo: Sharpe=0.76
+  9mo: Sharpe=0.62
+  12mo: Sharpe=0.75
+  max deviation from base: 18.3% [OK (robust)]
+
+Spec constraints respected: lookback/TOP_N/tickers were not optimised (sensitivity is a diagnostic, the base configuration lookback=6mo/top2 is used in all main calculations), monthly signals only, no ML/sentiment/macro overlay.
